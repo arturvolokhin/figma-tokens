@@ -113,7 +113,7 @@ const StyleDictionaryMixins = StyleDictionary.extend({
         {
           format: "scss/variables",
           filter: "withoutMixinsFilter",
-          destination: "main.scss",
+          destination: "variables.scss",
         },
       ],
     },
