@@ -86,7 +86,7 @@ const StyleDictionaryMixins = StyleDictionary.extend({
   platforms: {
     mixins: {
       transformGroup: "custom-transform",
-      buildPath: "./src/theme/style-dictionary/",
+      buildPath: "./assets/styles/",
       files: [
         {
           format: "mixinsFormatter",
@@ -108,17 +108,12 @@ const StyleDictionaryMixins = StyleDictionary.extend({
     // },
     main: {
       transformGroup: "custom-transform",
-      buildPath: "./src/theme/style-dictionary/",
+      buildPath: "./assets/styles/",
       files: [
         {
           format: "scss/variables",
           filter: "withoutMixinsFilter",
-          destination: "global.scss",
-        },
-        {
-          format: "javascript/module-flat",
-          filter: "withoutMixinsFilter",
-          destination: "global.js",
+          destination: "main.scss",
         },
       ],
     },

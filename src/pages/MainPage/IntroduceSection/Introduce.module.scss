@@ -1,31 +1,27 @@
+@import 'assets/styles/main.scss';
+@import 'assets/styles/mixins.scss';
+
 .section {
     position: relative;
     width: 100vw;
     height: 740px;
-    background: #191A1B;
+    background: $global-color-common-black;
     display: flex;
     align-items: center;
     justify-content: center;
 
     &__text {
         &_subtitle {
-            font-weight: 400;
-            font-size: 18px;
-            line-height: 27px;
+            @include web-font-title-18;
             text-align: center;
-            text-transform: uppercase;
-            color: #FFFFFF;
+            color: $global-color-common-white;
         }
 
         &_title {
+            @include web-font-title-64;
             width: 734px;
-            font-weight: 500;
-            font-size: 64px;
-            line-height: 95px;
-            letter-spacing: 0.02em;
-            text-transform: uppercase;
             text-align: center;
-            color: #FFFFFF;
+            color: $global-color-common-white;
         }
     }
 
@@ -56,7 +52,7 @@
                 font-size: 72px;
                 line-height: 107px;
                 text-align: center;
-                color: #F7654A;
+                color: $global-color-common-red;
             }
 
             &_subtitle {
@@ -64,7 +60,7 @@
                 font-size: 36px;
                 line-height: 53px;
                 text-transform: uppercase;
-                color: #000000;
+                color: $global-color-common-black;
             }
 
             &_descr {
@@ -72,7 +68,7 @@
                 font-size: 18px;
                 line-height: 27px;
                 text-align: center;
-                color: #999999;
+                color: $global-color-common-gray;
             }
 
 
