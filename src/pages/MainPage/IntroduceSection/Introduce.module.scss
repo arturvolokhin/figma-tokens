@@ -5,7 +5,7 @@
     position: relative;
     width: 100vw;
     height: 740px;
-    background: $global-color-common-black;
+    background: $global-color-common-3;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -14,14 +14,14 @@
         &_subtitle {
             @include web-font-title-18;
             text-align: center;
-            color: $global-color-common-white;
+            color: $global-color-common-1;
         }
 
         &_title {
             @include web-font-title-64;
             width: 734px;
             text-align: center;
-            color: $global-color-common-white;
+            color: $global-color-common-4;
         }
     }
 
@@ -37,7 +37,7 @@
         align-items: center;
         justify-content: center;
         gap: 30px;
-        background: #F7F7F7;
+        background: $global-color-common-5;
 
         &__item {
             width: 190px;
@@ -52,7 +52,7 @@
                 font-size: 72px;
                 line-height: 107px;
                 text-align: center;
-                color: $global-color-common-red;
+                color: $global-color-common-6;
             }
 
             &_subtitle {
@@ -60,7 +60,7 @@
                 font-size: 36px;
                 line-height: 53px;
                 text-transform: uppercase;
-                color: $global-color-common-black;
+                color: $global-color-common-2;
             }
 
             &_descr {
@@ -68,7 +68,7 @@
                 font-size: 18px;
                 line-height: 27px;
                 text-align: center;
-                color: $global-color-common-gray;
+                color: $global-color-common-3;
             }
 
 
