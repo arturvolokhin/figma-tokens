@@ -4,14 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "yarn build-dictionary && next build",
+    "build": "next build",
     "start": "next start",
-    "lint": "next lint --fix && next lint",
-    "build-dictionary": "yarn token-transformer-all && node ./sd-config.js && yarn lint",
-    "token-transformer-light-theme": "token-transformer ./src/figma-tokens/tokens.json ./src/figma-tokens/token-transformer-input/light-theme.json Light,global Dark,Desktop,Mobile --resolveReferences=false",
-    "token-transformer-dark-theme": "token-transformer ./src/figma-tokens/tokens.json ./src/figma-tokens/token-transformer-input/dark-theme.json Dark,global Light,Desktop,Mobile --resolveReferences=false",
-    "token-transformer-main": "token-transformer ./src/figma-tokens/tokens.json ./src/figma-tokens/token-transformer-input/main.json Desktop,global Light,Dark,Mobile --resolveReferences=false",
-    "token-transformer-all": "yarn token-transformer-light-theme && yarn token-transformer-dark-theme && yarn token-transformer-main"
+    "lint": "next lint --fix && next lint"
   },
   "dependencies": {
     "@next/font": "13.1.6",
