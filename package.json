@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "yarn build-dictionary && next build",
     "start": "next start",
-    "lint": "next lint --fix && next lint"
+    "lint": "next lint --fix && next lint",
+    "build-dictionary": "yarn token-transformer && node ./sd-config.js && yarn lint",
+    "token-transformer": "token-transformer ./src/figma-tokens/tokens.json ./src/figma-tokens/token-transformer-input/tokens.json --resolveReferences=false"
   },
   "dependencies": {
     "@next/font": "13.1.6",

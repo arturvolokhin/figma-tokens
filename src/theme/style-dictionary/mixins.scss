@@ -1,45 +1,18 @@
-@mixin font-label-13 {
-   font-family: Inter;
-   font-weight: 500;
-   line-height: unset;
-   font-size: 13px;
-   text-decoration: none;
-   text-transform: none;
-   letter-spacing: -0.04%;
-}
-@mixin font-headline-13 {
+@mixin web-font-title-18 {
    font-family: Inter;
    font-weight: 600;
-   line-height: unset;
-   font-size: 13px;
-   text-decoration: none;
-   text-transform: none;
-   letter-spacing: -0.09%;
-}
-@mixin font-title-12 {
-   font-family: Inter;
-   font-weight: 500;
-   line-height: unset;
-   font-size: 12px;
-   text-decoration: none;
-   text-transform: none;
-   letter-spacing: -0.04%;
-}
-@mixin font-title-14 {
-   font-family: Inter;
-   font-weight: 600;
-   line-height: unset;
-   font-size: 14px;
-   text-decoration: none;
-   text-transform: none;
-   letter-spacing: -0.09%;
-}
-@mixin font-body-13 {
-   font-family: Inter;
-   font-weight: 400;
    line-height: 27px;
-   font-size: 13px;
+   font-size: 18px;
    text-decoration: none;
-   text-transform: none;
+   text-transform: uppercase;
+   letter-spacing: -0.09%;
+}
+@mixin web-font-title-64 {
+   font-family: Inter;
+   font-weight: 600;
+   line-height: 95px;
+   font-size: 64px;
+   text-decoration: none;
+   text-transform: uppercase;
    letter-spacing: -0.09%;
 }

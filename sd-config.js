@@ -1,9 +1,9 @@
-const StyleDictionary = require('style-dictionary');
+const StyleDictionary = require("style-dictionary");
 
 const boxShadowTransformer = {
-  name: 'boxShadowTransformer',
-  type: 'value',
-  matcher: ({ type }) => type === 'boxShadow',
+  name: "boxShadowTransformer",
+  type: "value",
+  matcher: ({ type }) => type === "boxShadow",
   transformer: ({ original, value }) => {
     if (Array.isArray(value)) {
       let shadow = [];
@@ -18,11 +18,11 @@ const boxShadowTransformer = {
 };
 
 const mixinsFormatter = {
-  name: 'mixinsFormatter',
+  name: "mixinsFormatter",
   formatter: ({ dictionary }) => {
     return dictionary.allTokens
       .map((token) => {
-        if (token.type === 'typography') {
+        if (token.type === "typography") {
           const {
             fontFamily,
             fontWeight,
@@ -34,9 +34,9 @@ const mixinsFormatter = {
             textCase,
           } = token?.value;
           const weight = {
-            ['Medium']: '500',
-            ['Semi Bold']: '600',
-            ['Regular']: '400',
+            ["Medium"]: "500",
+            ["Semi Bold"]: "600",
+            ["Regular"]: "400",
           };
 
           return `@mixin ${token.name} {
@@ -51,24 +51,24 @@ const mixinsFormatter = {
         }
         return `$${token.name}: ${token.value};`;
       })
-      .join('\n');
+      .join("\n");
   },
 };
 
 const globalVariablesFilter = {
-  name: 'globalVariablesFilter',
+  name: "globalVariablesFilter",
   matcher: ({ original, type }) =>
-    !original?.description?.includes('global') && type !== 'typography',
+    !original?.description?.includes("global") && type !== "typography",
 };
 
 const mixinsFilter = {
-  name: 'mixinsFilter',
-  matcher: ({ type }) => type === 'typography',
+  name: "mixinsFilter",
+  matcher: ({ type }) => type === "typography",
 };
 
 const withoutMixinsFilter = {
-  name: 'withoutMixinsFilter',
-  matcher: ({ type }) => type !== 'typography',
+  name: "withoutMixinsFilter",
+  matcher: ({ type }) => type !== "typography",
 };
 
 StyleDictionary.registerFilter(mixinsFilter);
@@ -77,105 +77,110 @@ StyleDictionary.registerFilter(withoutMixinsFilter);
 StyleDictionary.registerFilter(globalVariablesFilter);
 StyleDictionary.registerTransform(boxShadowTransformer);
 StyleDictionary.registerTransformGroup({
-  name: 'custom-transform',
-  transforms: ['boxShadowTransformer', 'name/cti/kebab'],
+  name: "custom-transform",
+  transforms: ["boxShadowTransformer", "name/cti/kebab"],
 });
 
 const StyleDictionaryMixins = StyleDictionary.extend({
-  source: ['./src/figma-tokens/token-transformer-input/main.json'],
+  source: ["./src/figma-tokens/token-transformer-input/tokens.json"],
   platforms: {
     mixins: {
-      transformGroup: 'custom-transform',
-      buildPath: './src/theme/style-dictionary/',
+      transformGroup: "custom-transform",
+      buildPath: "./src/theme/style-dictionary/",
       files: [
         {
-          format: 'mixinsFormatter',
-          filter: 'mixinsFilter',
-          destination: 'mixins.scss',
+          format: "mixinsFormatter",
+          filter: "mixinsFilter",
+          destination: "mixins.scss",
         },
       ],
     },
-    js: {
-      transformGroup: 'custom-transform',
-      buildPath: './src/theme/style-dictionary/',
-      files: [
-        {
-          format: 'javascript/module-flat',
-          filter: 'mixinsFilter',
-          destination: 'mixins.js',
-        },
-      ],
-    },
+    // js: {
+    //   transformGroup: "custom-transform",
+    //   buildPath: "./src/theme/style-dictionary/",
+    //   files: [
+    //     {
+    //       format: "javascript/module-flat",
+    //       filter: "mixinsFilter",
+    //       destination: "mixins.js",
+    //     },
+    //   ],
+    // },
     main: {
-      transformGroup: 'custom-transform',
-      buildPath: './src/theme/style-dictionary/',
+      transformGroup: "custom-transform",
+      buildPath: "./src/theme/style-dictionary/",
       files: [
         {
-          format: 'scss/variables',
-          filter: 'withoutMixinsFilter',
-          destination: 'main.scss',
+          format: "scss/variables",
+          filter: "withoutMixinsFilter",
+          destination: "global.scss",
+        },
+        {
+          format: "javascript/module-flat",
+          filter: "withoutMixinsFilter",
+          destination: "global.js",
         },
       ],
     },
   },
 });
 
-const StyleDictionaryForDarkTheme = StyleDictionary.extend({
-  source: ['./src/figma-tokens/token-transformer-input/dark-theme.json'],
-  platforms: {
-    scss: {
-      transformGroup: 'custom-transform',
-      buildPath: './src/theme/style-dictionary/',
-      files: [
-        {
-          format: 'mixinsFormatter',
-          filter: 'globalVariablesFilter',
-          destination: 'dark-theme.scss',
-        },
-      ],
-    },
-    js: {
-      transformGroup: 'custom-transform',
-      buildPath: './src/theme/style-dictionary/',
-      files: [
-        {
-          format: 'javascript/module-flat',
-          filter: 'globalVariablesFilter',
-          destination: 'dark-theme.js',
-        },
-      ],
-    },
-  },
-});
+// const StyleDictionaryForDarkTheme = StyleDictionary.extend({
+//   source: ['./src/figma-tokens/token-transformer-input/dark-theme.json'],
+//   platforms: {
+//     scss: {
+//       transformGroup: 'custom-transform',
+//       buildPath: './src/theme/style-dictionary/',
+//       files: [
+//         {
+//           format: 'mixinsFormatter',
+//           filter: 'globalVariablesFilter',
+//           destination: 'dark-theme.scss',
+//         },
+//       ],
+//     },
+//     js: {
+//       transformGroup: 'custom-transform',
+//       buildPath: './src/theme/style-dictionary/',
+//       files: [
+//         {
+//           format: 'javascript/module-flat',
+//           filter: 'globalVariablesFilter',
+//           destination: 'dark-theme.js',
+//         },
+//       ],
+//     },
+//   },
+// });
 
-const StyleDictionaryForLightTheme = StyleDictionary.extend({
-  source: ['./src/figma-tokens/token-transformer-input/light-theme.json'],
-  platforms: {
-    scss: {
-      transformGroup: 'custom-transform',
-      buildPath: './src/theme/style-dictionary/',
-      files: [
-        {
-          format: 'mixinsFormatter',
-          filter: 'globalVariablesFilter',
-          destination: 'light-theme.scss',
-        },
-      ],
-    },
-    js: {
-      transformGroup: 'custom-transform',
-      buildPath: './src/theme/style-dictionary/',
-      files: [
-        {
-          format: 'javascript/module-flat',
-          filter: 'globalVariablesFilter',
-          destination: 'light-theme.js',
-        },
-      ],
-    },
-  },
-});
+// const StyleDictionaryForLightTheme = StyleDictionary.extend({
+//   source: ['./src/figma-tokens/token-transformer-input/light-theme.json'],
+//   platforms: {
+//     scss: {
+//       transformGroup: 'custom-transform',
+//       buildPath: './src/theme/style-dictionary/',
+//       files: [
+//         {
+//           format: 'mixinsFormatter',
+//           filter: 'globalVariablesFilter',
+//           destination: 'light-theme.scss',
+//         },
+//       ],
+//     },
+//     js: {
+//       transformGroup: 'custom-transform',
+//       buildPath: './src/theme/style-dictionary/',
+//       files: [
+//         {
+//           format: 'javascript/module-flat',
+//           filter: 'globalVariablesFilter',
+//           destination: 'light-theme.js',
+//         },
+//       ],
+//     },
+//   },
+// });
 
 StyleDictionaryMixins.buildAllPlatforms();
-StyleDictionaryForDarkTheme.buildAllPlatforms();
-StyleDictionaryForLightTheme.buildAllPlatforms();
+// StyleDictionaryForDarkTheme.buildAllPlatforms();
+// StyleDictionaryForLightTheme.buildAllPlatforms();
